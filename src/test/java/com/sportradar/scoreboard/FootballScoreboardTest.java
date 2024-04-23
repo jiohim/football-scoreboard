@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ScoreboardTest {
+public class FootballScoreboardTest {
 
     private FootballScoreboard scoreboard;
 

@@ -1,4 +1,4 @@
-package pl.live.scoreboard;
+package com.sportradar.scoreboard;
 
 public interface Match {
 
