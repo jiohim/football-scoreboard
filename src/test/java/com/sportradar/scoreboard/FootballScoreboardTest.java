@@ -88,7 +88,7 @@ public class FootballScoreboardTest {
         List<FootballMatch> anotherSummary = scoreboard.getMatchesOrderedByScore();
 
         //Checking for idempotent
-        assertEquals(summary , anotherSummary);
+        assertEquals(summary, anotherSummary);
 
         assertEquals("Uruguay", summary.get(0).getHomeTeam());
         assertEquals("Italy", summary.get(0).getAwayTeam());
@@ -149,5 +149,20 @@ public class FootballScoreboardTest {
         assertEquals(1000, scoreboard.getMatchesOrderedByScore().get(1).getHomeScore());
         assertEquals(1000, scoreboard.getMatchesOrderedByScore().get(0).getAwayScore());
         assertEquals(1000, scoreboard.getMatchesOrderedByScore().get(1).getAwayScore());
+    }
+
+    @Test
+    void testEqualsAndHashCode() {
+
+        FootballScoreboard scoreboard2 = new FootballScoreboard();
+
+        assertEquals(scoreboard2, scoreboard);
+        assertEquals(scoreboard2.hashCode(), scoreboard.hashCode());
+
+        scoreboard2.startMatch("Team A", "Team B");
+        scoreboard2.getAllMatches().getLast().updateScore(1, 1);
+
+        assertNotEquals(scoreboard2, scoreboard);
+        assertNotEquals(scoreboard2.hashCode(), scoreboard.hashCode());
     }
 }

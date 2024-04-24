@@ -1,8 +1,10 @@
 package com.sportradar.scoreboard;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.Deque;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentLinkedDeque;
-import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
@@ -39,7 +41,7 @@ public class FootballScoreboard implements Scoreboard<FootballMatch> {
     /**
      * Updates the score of the specified football match, reordering the matches based on starting from recent.
      *
-     * @param match The football match to update.
+     * @param match     The football match to update.
      * @param homeScore The new home team score.
      * @param awayScore The new away team score.
      */
@@ -58,6 +60,7 @@ public class FootballScoreboard implements Scoreboard<FootballMatch> {
 
     /**
      * This method creates a new CopyOnWriteArrayList of football matches sorted by total score, from highest to lowest.
+     *
      * @return A list of football matches ordered by total score.
      */
     public List<FootballMatch> getMatchesOrderedByScore() {
@@ -80,6 +83,25 @@ public class FootballScoreboard implements Scoreboard<FootballMatch> {
         if (o == null || getClass() != o.getClass()) return false;
 
         FootballScoreboard that = (FootballScoreboard) o;
+        if (matches.isEmpty() && that.matches.isEmpty()) return true;
+        return Objects.equals(matches, that.matches);
+    }
+
+    @Override
+    public int hashCode() {
+        if (matches.isEmpty()) {
+            return 0;
+        }
+        return Objects.hash(matches);
+    }
+
+
+   /*    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        FootballScoreboard that = (FootballScoreboard) o;
 
         return Objects.equals(matches, that.matches);
     }
@@ -87,6 +109,6 @@ public class FootballScoreboard implements Scoreboard<FootballMatch> {
     @Override
     public int hashCode() {
         return matches != null ? matches.hashCode() : 0;
-    }
+    }*/
 }
 

@@ -3,7 +3,7 @@ package com.sportradar.scoreboard;
 
 import java.util.List;
 
-public interface Scoreboard<T extends Match> extends Board{
+public interface Scoreboard<T extends Match> {
 
     FootballMatch startMatch(String homeTeam, String awayTeam);
 

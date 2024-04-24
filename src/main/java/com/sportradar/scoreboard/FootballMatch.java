@@ -45,15 +45,6 @@ public class FootballMatch implements Match {
     }
 
     /**
-     * Checks if the football match involves any of specified teams.
-     * @return True if the match involves any of two teams, otherwise false.
-     */
-    /*public boolean containsTeams(String team1, String team2) {
-        return homeTeam.equals(team1) || homeTeam.equals(team2) ||
-                awayTeam.equals(team1) || awayTeam.equals(team2);
-    }*/
-
-    /**
      * Checks if the football match involves any of the specified teams.
      *
      * @param teams The teams to check.
@@ -71,14 +62,15 @@ public class FootballMatch implements Match {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        FootballMatch match = (FootballMatch) o;
-        return Objects.equals(homeTeam, match.homeTeam) &&
-                Objects.equals(awayTeam, match.awayTeam);
+        if (!(o instanceof FootballMatch)) return false;
+        FootballMatch that = (FootballMatch) o;
+        return getHomeScore() == that.getHomeScore() && getAwayScore() == that.getAwayScore()
+                && Objects.equals(getHomeTeam(), that.getHomeTeam())
+                && Objects.equals(getAwayTeam(), that.getAwayTeam());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(homeTeam, awayTeam);
+        return Objects.hash(getHomeTeam(), getAwayTeam(), getHomeScore(), getAwayScore());
     }
 }
